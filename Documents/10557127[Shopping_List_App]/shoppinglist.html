@@ -1,38 +1,52 @@
 <!DOCTYPE html>
 <html>
 
-    <head>
+<head>
 
-        <meta http-equiv=”Content-Type” content=”text/html; charset=UTF-8”>
-        <meta name=”viewport” content=”width=device-width, initial-scale=1”>
-        
-        <title>Page Title</title>
+<title> Shopping List </title>
 
-        <link rel=”stylesheet” href=”http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.css” />
-        <script src=”http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js”></script>
-        <script src=”http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.js”></script>
-    
-    </head>
+<link rel="stylesheet" type="text/css" href="style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 
-    <body>
-        
-        <div data-role=”page”>
+</head>
 
-            <div data-role=”header”>
-                <h1>Page title</h1>
+<body>
+
+    <div data-role="page">
+
+        <div data-role="header">
+            <h1>My shopping list</h1>
+        </div>
+
+        <div data-role="main" class="ui-content"> 
+
+            <div class="content">
+                <p> Your Shopping list is empty </p>
+                <p> Press "Add Item" below to add items to your list </p>
+                <br/>
             </div>
+            
+        </div>
 
-            <div data-role=”content”>
-                Body copy
+        <div data-role="footer">
+
+            <div class="footer">
+                <div class="button">
+                    <a href = "#" data-role = "button"  data-inline = "true" style="margin-left: 10px;"> Delete </a>
+                    <a href = "#" data-role = "button"  data-inline = "true" style="float: right; margin-right: 10px;"> Add Item </a>
+                </div>
                 
             </div>
 
-            <div data-role=”footer”>
-                Copyright
-            </div>
-
         </div>
+            
 
-    </body>
+    </div> 
+
+</body>
 
 </html>
+
