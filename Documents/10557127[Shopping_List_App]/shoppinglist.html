@@ -15,9 +15,10 @@
 
 <body>
 
-    <div data-role="page">
+<!-- This is the homepage -->
+    <div data-role="page" id="main_page" data-theme='a'>
 
-        <div data-role="header">
+        <div data-role="header" data-theme='b'>
             <h1>My shopping list</h1>
         </div>
 
@@ -31,12 +32,13 @@
             
         </div>
 
-        <div data-role="footer">
+        <div data-role="footer" data-position="fixed" data-theme='b'>
 
-            <div class="footer">
+            <div data-role="navbar" class="footer">
                 <div class="button">
-                    <a href = "#" data-role = "button"  data-inline = "true" style="margin-left: 10px;"> Delete </a>
-                    <a href = "#" data-role = "button"  data-inline = "true" style="float: right; margin-right: 10px;"> Add Item </a>
+                     <a href = "#" data-role = "button"  data-inline = "true" style="margin-left: 10px;"> Delete </a>
+                    <a href = "#item_page" data-role = "button"  data-inline = "true" style="float: right; margin-right: 10px;"> Add Item </a>
+                   
                 </div>
                 
             </div>
@@ -45,7 +47,24 @@
             
 
     </div> 
+<!-- end of the homepage -->
 
+<!-- This is the second page where items are entered -->
+
+    <div data-role="page" id="item_page">
+
+        <div data-role="header" data-theme='b'>
+            
+                <a href="#main_page"> Shopping List (0) </a>
+                <h1></h1>
+                <a href=""> Add Item </a>
+           
+            
+        </div>
+
+    </div>
+
+<!-- end of the second page -->
 </body>
 
 </html>

@@ -6,3 +6,8 @@
 .btn {
     margin-left: 10px;
 }
+
+.ui-header, .ui-bar-b{
+    background-color: #1d1d1d;
+}
+
