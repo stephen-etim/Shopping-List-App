@@ -3,14 +3,14 @@
 
 <head>
 
-<title> Shopping List </title>
+    <title> Shopping List </title>
 
-<link rel="stylesheet" type="text/css" href="style.css">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
-<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script type="text/javascript" src="http://dev.jtsage.com/cdn/spinbox/latest/jqm-spinbox.min.js"></script>
 </head>
 
 <body>
@@ -61,6 +61,39 @@
            
             
         </div>
+
+        <div class="ui-field-contain">
+            <form class="ui-filterable">
+                <input id="filterBasic-input" data-type="text" placeholder="Item name">
+            </form>
+
+            <br/>
+
+            <label for="spin"> <b>Quantity</b> </label>
+            <br/>
+            <input type="text" data-role="spinbox" name="spin" id="spin" value="0" min="0" max="100" />
+            
+            <br/>
+
+            <label for="select-native-1"> <b> Category </b> </label>
+            <br/>
+            <select name="select-native-1" id="select-native-1">
+                <option value="small">None</option>
+                <option value="medium">Dairy</option>
+                <option value="large">Meat & Fish</option>
+                <option value="large">Tinned Food</option>
+                <option value="large">Fruits & Veget.</option>
+                <option value="large">Drinks</option>
+                <option value="large">Frozen Food</option>
+                <option value="large">Houseware</option>
+                <option value="large">Baked Goods</option>
+                <option value="large">Candies</option>
+            </select>
+
+        </div>
+
+        
+
 
     </div>
 

@@ -11,3 +11,9 @@
     background-color: #1d1d1d;
 }
 
+.ui-field-contain{
+    text-align: center;
+    margin-right: 10px;
+    margin-left: 10px;
+    margin-top: 10px;
+}
