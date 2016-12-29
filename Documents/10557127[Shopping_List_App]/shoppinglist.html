@@ -53,18 +53,19 @@
 
     <div data-role="page" id="item_page">
 
-        <div data-role="header" data-theme='b'>
+        <div data-role="header" data-theme='b' class="pge2-header">
             
-                <a href="#main_page"> Shopping List (0) </a>
-                <h1></h1>
-                <a href=""> Add Item </a>
+                 <button type="button" id="listBtn" onclick="goToList()">Shopping List</button>
+                 <h1></h1>
+                 <button type="button" id="addItem" onclick="itemAdded()">Add Item</button>
+            
            
             
         </div>
 
         <div class="ui-field-contain">
             <form class="ui-filterable">
-                <input id="filterBasic-input" data-type="text" placeholder="Item name">
+                <input id="filterBasic-input" data-type="text" placeholder="Item name" autocomplete="on">
             </form>
 
             <br/>
@@ -78,19 +79,31 @@
             <label for="select-native-1"> <b> Category </b> </label>
             <br/>
             <select name="select-native-1" id="select-native-1">
-                <option value="small">None</option>
-                <option value="medium">Dairy</option>
-                <option value="large">Meat & Fish</option>
-                <option value="large">Tinned Food</option>
-                <option value="large">Fruits & Veget.</option>
-                <option value="large">Drinks</option>
-                <option value="large">Frozen Food</option>
-                <option value="large">Houseware</option>
-                <option value="large">Baked Goods</option>
-                <option value="large">Candies</option>
+                <option value="None" >None</option>
+                <option value="Dairy">Dairy</option>
+                <option value="Meat & Fish">Meat & Fish</option>
+                <option value="Tinned Food">Tinned Food</option>
+                <option value="Fruits & Veget.">Fruits & Veget.</option>
+                <option value="Drinks">Drinks</option>
+                <option value="Frozen Food">Frozen Food</option>
+                <option value="Houseware">Houseware</option>
+                <option value="Baked Goods">Baked Goods</option>
+                <option value="Candies">Candies</option>
             </select>
 
         </div>
+
+        <script>
+            function itemAdded() {
+                var items = $("#filterBasic-input").val();
+                var quantity = $("#spin").val();
+                var category = $("#select-native-1").val();
+
+                var list = "<li>" + category + "</li>" 
+
+                alert($(list).text() + " have been added" )
+            }
+        </script>
 
         
 
