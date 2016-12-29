@@ -63,6 +63,7 @@
             
         </div>
 
+<!--Form to enter name, quantity and category of the items to be added to the shopping list-->
         <div class="ui-field-contain">
             <form class="ui-filterable">
                 <input id="filterBasic-input" data-type="text" placeholder="Item name" autocomplete="on">
@@ -92,7 +93,9 @@
             </select>
 
         </div>
+<!--end of the form-->
 
+<!-- Script to add item to a list and return an aler to inform user that item have been added-->
         <script>
             function itemAdded() {
                 var items = $("#filterBasic-input").val();
@@ -104,7 +107,7 @@
                 alert($(list).text() + " have been added" )
             }
         </script>
-
+<!-- end of the script-->
         
 
 
