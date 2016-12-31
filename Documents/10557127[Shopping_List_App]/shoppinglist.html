@@ -11,6 +11,9 @@
     <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
     <script type="text/javascript" src="http://dev.jtsage.com/cdn/spinbox/latest/jqm-spinbox.min.js"></script>
+
+    
+
 </head>
 
 <body>
@@ -25,8 +28,18 @@
         <div data-role="main" class="ui-content"> 
 
             <div class="content">
-                <p> Your Shopping list is empty </p>
-                <p> Press "Add Item" below to add items to your list </p>
+                <form class="ui-filterable">
+
+                    <input id="myFilter" data-type="search" placeholder="Search for items..">
+                
+                </form>
+
+                <ul data-role="listview" data-filter="true" data-input="#myFilter" data-autodividers="true" data-inset="true" id="shoppinglist">
+                </ul>
+                <div class="firsttimetext">
+                    <p> Your Shopping list is empty </p>
+                    <p> Press "Add Item" below to add items to your list </p>
+                </div>
                 <br/>
             </div>
             
@@ -64,47 +77,153 @@
         </div>
 
 <!--Form to enter name, quantity and category of the items to be added to the shopping list-->
-        <div class="ui-field-contain">
-            <form class="ui-filterable">
+        <div class="ui-field-contain" id="itemPage"> 
+            <form class="ui-filterable" id="inputItem">
                 <input id="filterBasic-input" data-type="text" placeholder="Item name" autocomplete="on">
-            </form>
-
-            <br/>
-
-            <label for="spin"> <b>Quantity</b> </label>
-            <br/>
-            <input type="text" data-role="spinbox" name="spin" id="spin" value="0" min="0" max="100" />
             
-            <br/>
 
-            <label for="select-native-1"> <b> Category </b> </label>
-            <br/>
-            <select name="select-native-1" id="select-native-1">
-                <option value="None" >None</option>
-                <option value="Dairy">Dairy</option>
-                <option value="Meat & Fish">Meat & Fish</option>
-                <option value="Tinned Food">Tinned Food</option>
-                <option value="Fruits & Veget.">Fruits & Veget.</option>
-                <option value="Drinks">Drinks</option>
-                <option value="Frozen Food">Frozen Food</option>
-                <option value="Houseware">Houseware</option>
-                <option value="Baked Goods">Baked Goods</option>
-                <option value="Candies">Candies</option>
-            </select>
+                <br/>
+
+                <label for="spin"> <b>Quantity</b> </label>
+                <br/>
+                <input type="text" data-role="spinbox" name="spin" id="spin" value="0" min="0" max="100" />
+                
+                <br/>
+
+                <label for="select-native-1"> <b> Category </b> </label>
+                <br/>
+                <select name="select-native-1" id="select-native-1">
+                    <option value="None" id="cat0" >None</option>
+                    <option value="Dairy" id="cat1">Dairy</option>
+                    <option value="Meat & Fish" id="cat2">Meat & Fish</option>
+                    <option value="Tinned Food" id="cat3">Tinned Food</option>
+                    <option value="Fruits & Veget." id="cat4">Fruits & Veget.</option>
+                    <option value="Drinks" id="cat5">Drinks</option>
+                    <option value="Frozen Food" id="cat6">Frozen Food</option>
+                    <option value="Houseware" id="cat7">Houseware</option>
+                    <option value="Baked Goods" id="cat8">Baked Goods</option>
+                    <option value="Candies" id="cat9">Candies</option>
+                </select>
+
+            </form>
 
         </div>
 <!--end of the form-->
 
 <!-- Script to add item to a list and return an aler to inform user that item have been added-->
         <script>
+
+            //load page configuration
+            $(document).ready(function(){
+                
+                
+                
+                if (localStorage.sList!=null) getListFromStorage();
+                
+            
+            })
+
+            $(document).on('click', 'li', function(){
+                if ($(this).hasClass("bought"))
+                    {
+                    $(this).removeClass("bought");
+                    $(this).addClass("tobuy");
+                    }
+                else
+                    {
+                    $(this).removeClass("tobuy");
+                    $(this).addClass("bought");
+                    }
+                localStorage.sList = collectData();
+            });
+
+
+            //itemAdded button on item_page configuration
             function itemAdded() {
-                var items = $("#filterBasic-input").val();
+                
+                var item = $("#filterBasic-input").val();
                 var quantity = $("#spin").val();
+                
                 var category = $("#select-native-1").val();
+                var list = "<li>" + item + " : " + quantity + "</li>" ;
+                
 
-                var list = "<li>" + category + "</li>" 
+                var form = document.getElementById("inputItem");
+                form.reset();
 
-                alert($(list).text() + " have been added" )
+             
+
+                if(item.length>0 && quantity>0)
+                {
+                    //Alert the user that the item has been added
+                    alert($(list).text() + " has been added to your list" ) 
+                }
+                
+                else{
+                
+                    alert("Please enter item name")
+                    list=""
+                }
+                                
+                //Add the item to the shopping list on main_page
+                $("#shoppinglist").append(list);
+
+                //save the item on local storage
+                localStorage.sList = collectData();
+
+               
+            }
+
+            //Collect item for local storage
+            function collectData() {
+
+                var jList = [];
+                $("#shoppinglist").children("li").each(function() {
+                var s = $(this).text(); //(this will give us item + quantity
+                var boughtOrNot = $(this).hasClass("bought");
+                var thisItem = {};
+                thisItem.itemQuantity = s;
+                thisItem.bought = boughtOrNot;
+                jList.push(thisItem);
+                });
+                return JSON.stringify(jList);
+
+            }
+
+            //Retrieve list from local storage
+            function getListFromStorage() {
+
+                var stringList = localStorage.sList;
+                var jsonList = JSON.parse(stringList);
+                $.each(jsonList, function(i, groceryItem) {
+                var li;
+                if (groceryItem.bought)
+                {
+                li = "<li class='bought'>" + groceryItem.itemQuantity +  "</li>";   
+                }
+                else
+                {
+                li =  "<li>" + groceryItem.itemQuantity +  "</li>";     
+                }
+
+                $("#shoppinglist").append(li);
+
+
+
+                });
+                $('.firsttimetext').empty();
+            }
+
+
+            //shopping list button on item_page configuration
+            function goToList(){
+                $.mobile.changePage("#main_page");
+                $('.firsttimetext').empty();
+                var form = document.getElementById("inputItem");
+                form.reset();
+
+
+
             }
         </script>
 <!-- end of the script-->
