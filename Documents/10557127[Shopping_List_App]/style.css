@@ -23,6 +23,10 @@
 }
 
 .tobuy {
-    color:black
+    color:black;
+}
+
+.todelete{
+    color: red;
 }
 

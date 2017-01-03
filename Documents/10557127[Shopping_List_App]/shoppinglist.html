@@ -11,6 +11,7 @@
     <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
     <script type="text/javascript" src="http://dev.jtsage.com/cdn/spinbox/latest/jqm-spinbox.min.js"></script>
+    <script src="configuration.js"> </script>
 
     
 
@@ -34,8 +35,11 @@
                 
                 </form>
 
-                <ul data-role="listview" data-filter="true" data-input="#myFilter" data-autodividers="true" data-inset="true" id="shoppinglist">
+                <ul  class="list" data-role="listview" data-filter="true" data-input="#myFilter" data-autodividers="false" data-inset="true" data-icon="false" data-split-icon="delete" data-split-theme="d" id="shoppinglist">
+
+                
                 </ul>
+
                 <div class="firsttimetext">
                     <p> Your Shopping list is empty </p>
                     <p> Press "Add Item" below to add items to your list </p>
@@ -48,11 +52,24 @@
         <div data-role="footer" data-position="fixed" data-theme='b'>
 
             <div data-role="navbar" class="footer">
-                <div class="button">
-                     <a href = "#" data-role = "button"  data-inline = "true" style="margin-left: 10px;"> Delete </a>
-                    <a href = "#item_page" data-role = "button"  data-inline = "true" style="float: right; margin-right: 10px;"> Add Item </a>
-                   
-                </div>
+                
+                     <a href = "#delete" data-role = "button" data-rel="popup" data-position-to="#" data-inline = "true" style="margin-left: 10px;"> Delete </a>
+                     
+                     <div data-role="popup" id="delete" class="ui-content" data-arrow="b">
+                         <div data-role="main" class="ui-content">
+                             <button type="button" id="delete" onclick="removeItem">Remove Items</button>
+                             <button type="button" id="clear" onclick="clearList()" >Clear List</button>
+                             
+                         </div>
+                     </div>
+                     
+                    
+                     <a href = "#item_page" data-role = "button"  data-inline = "true" style="float: right; margin-right: 10px;"> Add Item </a>
+                 
+                    
+           
+
+                
                 
             </div>
 
@@ -79,7 +96,7 @@
 <!--Form to enter name, quantity and category of the items to be added to the shopping list-->
         <div class="ui-field-contain" id="itemPage"> 
             <form class="ui-filterable" id="inputItem">
-                <input id="filterBasic-input" data-type="text" placeholder="Item name" autocomplete="on">
+                <input id="filterBasic-input" data-type="text" placeholder="Item name" autocomplete="on"/>
             
 
                 <br/>
@@ -109,126 +126,6 @@
 
         </div>
 <!--end of the form-->
-
-<!-- Script to add item to a list and return an aler to inform user that item have been added-->
-        <script>
-
-            //load page configuration
-            $(document).ready(function(){
-                
-                
-                
-                if (localStorage.sList!=null) getListFromStorage();
-                
-            
-            })
-
-            $(document).on('click', 'li', function(){
-                if ($(this).hasClass("bought"))
-                    {
-                    $(this).removeClass("bought");
-                    $(this).addClass("tobuy");
-                    }
-                else
-                    {
-                    $(this).removeClass("tobuy");
-                    $(this).addClass("bought");
-                    }
-                localStorage.sList = collectData();
-            });
-
-
-            //itemAdded button on item_page configuration
-            function itemAdded() {
-                
-                var item = $("#filterBasic-input").val();
-                var quantity = $("#spin").val();
-                
-                var category = $("#select-native-1").val();
-                var list = "<li>" + item + " : " + quantity + "</li>" ;
-                
-
-                var form = document.getElementById("inputItem");
-                form.reset();
-
-             
-
-                if(item.length>0 && quantity>0)
-                {
-                    //Alert the user that the item has been added
-                    alert($(list).text() + " has been added to your list" ) 
-                }
-                
-                else{
-                
-                    alert("Please enter item name")
-                    list=""
-                }
-                                
-                //Add the item to the shopping list on main_page
-                $("#shoppinglist").append(list);
-
-                //save the item on local storage
-                localStorage.sList = collectData();
-
-               
-            }
-
-            //Collect item for local storage
-            function collectData() {
-
-                var jList = [];
-                $("#shoppinglist").children("li").each(function() {
-                var s = $(this).text(); //(this will give us item + quantity
-                var boughtOrNot = $(this).hasClass("bought");
-                var thisItem = {};
-                thisItem.itemQuantity = s;
-                thisItem.bought = boughtOrNot;
-                jList.push(thisItem);
-                });
-                return JSON.stringify(jList);
-
-            }
-
-            //Retrieve list from local storage
-            function getListFromStorage() {
-
-                var stringList = localStorage.sList;
-                var jsonList = JSON.parse(stringList);
-                $.each(jsonList, function(i, groceryItem) {
-                var li;
-                if (groceryItem.bought)
-                {
-                li = "<li class='bought'>" + groceryItem.itemQuantity +  "</li>";   
-                }
-                else
-                {
-                li =  "<li>" + groceryItem.itemQuantity +  "</li>";     
-                }
-
-                $("#shoppinglist").append(li);
-
-
-
-                });
-                $('.firsttimetext').empty();
-            }
-
-
-            //shopping list button on item_page configuration
-            function goToList(){
-                $.mobile.changePage("#main_page");
-                $('.firsttimetext').empty();
-                var form = document.getElementById("inputItem");
-                form.reset();
-
-
-
-            }
-        </script>
-<!-- end of the script-->
-        
-
 
     </div>
 
