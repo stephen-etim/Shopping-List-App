@@ -20,7 +20,7 @@
                     {
                     $(this).removeClass("tobuy");
                     $(this).addClass("bought");
-                    }
+                    } 
                 localStorage.sList = collectData();
             });
 
