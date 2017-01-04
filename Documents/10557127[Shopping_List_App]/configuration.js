@@ -29,12 +29,14 @@
                 if ($(this).hasClass("todelete"))
                     {
                     $(this).removeClass("todelete");
-                    $(this).addClass("tobuy");
+                    $(this).addClass("nondelete");
+                    
                     }
                 else
                     {
-                    $(this).removeClass("tobuy");
+                    $(this).removeClass("nondelete");
                     $(this).addClass("todelete");
+                    alert("Press 'Delete' to remove item")
                     }
                 //localStorage.sList = collectData();
             });
@@ -110,8 +112,6 @@
 
                 $("#shoppinglist").append(li);
 
-
-
                 });
                 $('.firsttimetext').empty();
             }
@@ -119,19 +119,32 @@
 
             //shopping list button on item_page configuration
             function goToList(){
-                $.mobile.changePage("#main_page");
-                $('.firsttimetext').empty();
-                var form = document.getElementById("inputItem");
-                form.reset();
-
-
-
+                
+                    var form = document.getElementById("inputItem");
+                    $.mobile.changePage("#main_page");
+                    $('.firsttimetext').empty();
+                    form.reset();
+                
             }
 
             //remove item button
             function removeItem(){
-                alert("hello");
+                
+                $("button").click(function(){
+                   $('#shoppinglist .todelete').remove();
+                   
+
+                    localStorage.sList = collectData();
+                    
+                
+                });
+                
+                //$("#shoppinglist").listview("refresh");
+                
+                
+
             }
+            
             
             //clear list button
             function clearList(){
