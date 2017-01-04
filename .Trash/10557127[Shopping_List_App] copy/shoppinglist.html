@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title> Shopping List </title>
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script type="text/javascript" src="http://dev.jtsage.com/cdn/spinbox/latest/jqm-spinbox.min.js"></script>
+    <script src="configuration.js"> </script>
+
+    
+
+</head>
+
+<body>
+
+<!-- This is the homepage -->
+    <div data-role="page" id="main_page" data-theme='a'>
+
+        <div data-role="header" data-theme='b'>
+            <h1>My shopping list</h1>
+        </div>
+
+        <div data-role="main" class="ui-content"> 
+
+            <div class="content">
+                <form class="ui-filterable">
+
+                    <input id="myFilter" data-type="search" placeholder="Search for items..">
+                
+                </form>
+
+                <ul  class="list" data-role="listview" data-filter="true" data-input="#myFilter" data-autodividers="false" data-inset="true" data-icon="false" data-split-icon="delete" data-split-theme="d" id="shoppinglist">
+
+                
+                </ul>
+
+                <div class="firsttimetext">
+                    <p> Your Shopping list is empty </p>
+                    <p> Press "Add Item" below to add items to your list </p>
+                </div>
+                <br/>
+            </div>
+            
+        </div>
+
+        <div data-role="footer" data-position="fixed" data-theme='b'>
+
+            <div data-role="navbar" class="footer">
+                
+                     <a href = "#delete" data-role = "button" data-rel="popup" data-position-to="#" data-inline = "true" style="margin-left: 10px;"> Delete </a>
+                     
+                     <div data-role="popup" id="delete" class="ui-content" data-arrow="b">
+                         <div data-role="main" class="ui-content">
+                             <button type="button" id="delete" onclick="removeItem()">Remove Items</button>
+                             <button type="button" id="clear" onclick="clearList()" >Clear List</button>
+                             
+                         </div>
+                     </div>
+                     
+                    
+                     <a href = "#item_page" data-role = "button"  data-inline = "true" style="float: right; margin-right: 10px;"> Add Item </a>
+                 
+                    
+           
+
+                
+                
+            </div>
+
+        </div>
+            
+
+    </div> 
+<!-- end of the homepage -->
+
+<!-- This is the second page where items are entered -->
+
+    <div data-role="page" id="item_page">
+
+        <div data-role="header" data-theme='b' class="pge2-header">
+            
+                 <button type="button" id="listBtn" onclick="goToList()">Shopping List</button>
+                 <h1></h1>
+                 <button type="button" id="addItem" onclick="itemAdded()">Add Item</button>
+            
+           
+            
+        </div>
+
+<!--Form to enter name, quantity and category of the items to be added to the shopping list-->
+        <div class="ui-field-contain" id="itemPage"> 
+            <form class="ui-filterable" id="inputItem">
+                <input id="filterBasic-input" data-type="text" placeholder="Item name" autocomplete="on"/>
+            
+
+                <br/>
+
+                <label for="spin"> <b>Quantity</b> </label>
+                <br/>
+                <input type="text" data-role="spinbox" name="spin" id="spin" value="0" min="0" max="100" />
+                
+                <br/>
+
+                <label for="select-native-1"> <b> Category </b> </label>
+                <br/>
+                <select name="select-native-1" id="select-native-1">
+                    <option value="None" id="cat0" >None</option>
+                    <option value="Dairy" id="cat1">Dairy</option>
+                    <option value="Meat & Fish" id="cat2">Meat & Fish</option>
+                    <option value="Tinned Food" id="cat3">Tinned Food</option>
+                    <option value="Fruits & Veget." id="cat4">Fruits & Veget.</option>
+                    <option value="Drinks" id="cat5">Drinks</option>
+                    <option value="Frozen Food" id="cat6">Frozen Food</option>
+                    <option value="Houseware" id="cat7">Houseware</option>
+                    <option value="Baked Goods" id="cat8">Baked Goods</option>
+                    <option value="Candies" id="cat9">Candies</option>
+                </select>
+
+            </form>
+
+        </div>
+<!--end of the form-->
+
+    </div>
+
+<!-- end of the second page -->
+</body>
+
+</html>
+

@@ -1,0 +1,32 @@
+.content {
+    text-align: center;
+    
+}
+
+.btn {
+    margin-left: 10px;
+}
+
+.ui-header, .ui-bar-b{
+    background-color: #1d1d1d;
+}
+
+.ui-field-contain{
+    text-align: center;
+    margin-right: 10px;
+    margin-left: 10px;
+    margin-top: 10px;
+} 
+
+.bought {
+    text-decoration: line-through;
+}
+
+.tobuy {
+    color:black;
+}
+
+.todelete{
+    color: red;
+}
+
